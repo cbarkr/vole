@@ -1,7 +1,5 @@
 <h1 align="center">VOLE (Vulnerability Observance and Learning-based Exploitation)</h1>
 
----
-
 VOLE is a tool for detecting common bug classes in program binaries. It leverages:
 
 - [angr](https://github.com/angr/angr) for symbolic execution, control-flow graph (CFG) recovery, and intermediate representation (IR) lifting
@@ -13,7 +11,7 @@ VOLE is a tool for detecting common bug classes in program binaries. It leverage
 
 ### Requirements
 
-- Linux/WSL (macOS and Windows currently unsupported)
+- Linux/WSL (macOS and Windows are unsupported)
 - Python 3.11+
 - pip
 
@@ -28,7 +26,7 @@ VOLE is a tool for detecting common bug classes in program binaries. It leverage
 
 ### Installation and Setup
 
-#### 1. Venv
+#### 1. Activating Venv
 
 ```bash
 python -m venv ./venv
@@ -44,20 +42,20 @@ python -m pip install -r requirements-nvidia.txt # (Optional) For NVIDIA GPUs
 python -m pip install -r requirements-amd.txt # (Optional) For AMD GPUs
 ```
 
-#### 3. Setup the FastText model and SARD dataset
+#### 3. Install Required Models and Data
 
 ```bash
 python setup.py
 ```
 
-#### 4. Acquiring Training Data
+#### 4. Compiling Training Data
 
 > [!NOTE]
 > For consistency, a Dockerfile has been provided to compile the SARD test cases
 
 From the root directory of the repository:
 
-1. (Optional) Build the Docker image with `docker build -t sard-env:latest data/SARD`
+1. (Optional) Build the Docker image with `docker build -t sard-env:latest .`
 2. Compile the target CWEs per CWE-ID by running:
   a. Bare metal: `python vole/make.py CWE<ID> data/SARD`
   b. Docker: `docker run -it --rm -v "$PWD":/usr/src/env -w /usr/src/env sard-env python3 vole/make.py CWE<ID> data/SARD`
